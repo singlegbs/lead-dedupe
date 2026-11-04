@@ -31,3 +31,12 @@
 @keyframes spin{to{transform:rotate(360deg)}}}
 @media(max-width:700px){.review .controls{padding:16px;gap:14px}}
 @media(prefers-reduced-motion:reduce){.chips button:hover{transform:none}}
+/* File upload and quieter surfaces */
+input[type=file]{padding:6px;color:#5c665f;font:14px Geist,Arial,sans-serif;cursor:pointer}
+input[type=file]::file-selector-button{margin-right:12px;padding:10px 16px;border:1px solid #d6e2d5;border-radius:999px;background:#fff;color:#14251a;font:600 14px Geist,Arial,sans-serif;cursor:pointer}
+input[type=file]::file-selector-button:hover{background:#f4f8f3;border-color:#a8c4aa}
+.prompt{border:1px solid #d6e2d5;padding:0;background:#fff}
+.prompt:before{display:none}
+.logo{box-shadow:none}
+.final{background:#173a25}
+.review #results tr:only-child td[colspan="5"]:before,.review #results tr:only-child td[colspan="5"]:after{content:none}
