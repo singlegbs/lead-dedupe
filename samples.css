@@ -1,0 +1,5 @@
+.chips button{cursor:pointer;transition:transform .24s ease,background-color .24s ease,border-color .24s ease,color .24s ease,box-shadow .24s ease}
+.chips button[aria-pressed="true"]{background:#c2e8c4;color:#123a25;border-color:#6db27d;box-shadow:0 2px 10px rgba(21,94,52,.12)}
+.chips button:active{transform:scale(.98)}
+.chips button:focus-visible{outline:3px solid #1a7d49;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){.chips button{transition:none}.chips button:active{transform:none}}
