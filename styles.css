@@ -47,3 +47,7 @@ input[type=file]::file-selector-button:hover{background:#f4f8f3;border-color:#a8
 .file-upload .file-button{display:table;margin-top:7px;padding:10px 16px;border:1px solid #d6e2d5;border-radius:999px;background:#fff;color:#14251a;font:600 14px Geist,Arial,sans-serif;cursor:pointer}
 .file-upload:hover .file-button{background:#f4f8f3;border-color:#a8c4aa}
 .file-upload input:focus-visible + .file-button{outline:2px solid #16a34a;outline-offset:2px}
+/* Original contour canvas stays behind all hero content. */
+.hero{position:relative;isolation:isolate}
+#hero-background{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.hero > :not(#hero-background){position:relative;z-index:1}
