@@ -40,3 +40,10 @@ input[type=file]::file-selector-button:hover{background:#f4f8f3;border-color:#a8
 .logo{box-shadow:none}
 .final{background:#173a25}
 .review #results tr:only-child td[colspan="5"]:before,.review #results tr:only-child td[colspan="5"]:after{content:none}
+/* Brand mark and accessible upload label */
+.logo{display:grid;place-items:center;border-radius:50%;background:#176e3a;color:#fff;font:700 12px Geist,Arial,sans-serif;letter-spacing:.02em}
+.file-upload{position:relative;margin-top:14px}
+.file-upload input[type=file]{position:absolute;width:1px;height:1px;padding:0;margin:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.file-upload .file-button{display:table;margin-top:7px;padding:10px 16px;border:1px solid #d6e2d5;border-radius:999px;background:#fff;color:#14251a;font:600 14px Geist,Arial,sans-serif;cursor:pointer}
+.file-upload:hover .file-button{background:#f4f8f3;border-color:#a8c4aa}
+.file-upload input:focus-visible + .file-button{outline:2px solid #16a34a;outline-offset:2px}
