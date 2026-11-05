@@ -29,3 +29,6 @@
 .ld-promo .ld-promo-cta:focus-visible{outline:3px solid #b9ed6d;outline-offset:4px}
 @media(max-width:700px){.review .controls{padding:16px;gap:14px}.ld-promo{min-height:420px;padding:85px 22px 110px}}
 @media(prefers-reduced-motion:reduce){.review,.ld-promo .ld-promo-cta{transition:none}.ld-promo .ld-promo-cta:hover{transform:none}}
+/* Dark aurora on the existing final card; its content and link are unchanged. */
+.final{position:relative;overflow:hidden;isolation:isolate;border:1px solid #203a2b;background:radial-gradient(ellipse at 85% 105%,rgba(149,220,45,.70),transparent 38%),radial-gradient(ellipse at 20% 110%,rgba(0,154,96,.8),transparent 44%),radial-gradient(ellipse at 60% 120%,rgba(0,109,60,.92),transparent 48%),linear-gradient(180deg,#07100b 0%,#102719 100%);color:#f8fcf8;box-shadow:0 16px 45px rgba(10,48,25,.16)}
+.final h2{color:#fff}.final h2 em{color:#b9ed6d}.final .eyebrow{color:#b7dbb9}.final p{color:#d4dfd5}.final .button.primary{background:#fff;border-color:#fff;color:#101811}.final .button.primary:hover{background:#e8f3e9;border-color:#e8f3e9}.final .button.primary:focus-visible{outline:3px solid #b9ed6d;outline-offset:4px}
