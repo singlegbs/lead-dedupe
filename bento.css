@@ -46,3 +46,5 @@
   .review .controls,.review .tablewrap{box-sizing:border-box;width:100%;max-width:100%;min-width:0}
   .review .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
 }
+/* Constrain the native iOS date control to the same padded grid cell. */
+.review .controls input[type="date"]#start{-webkit-appearance:none;appearance:none;display:block;box-sizing:border-box;width:100%;min-width:0;max-width:100%;margin:9px 0 0;padding:12px 14px;text-align:left}
