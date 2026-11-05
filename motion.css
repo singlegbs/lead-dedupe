@@ -1,0 +1,19 @@
+/* Lightweight LeadDedupe motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal { filter:none; transform:translateY(20px); transition:opacity .55s ease,transform .55s ease,box-shadow .25s ease,border-color .25s ease; }
+  .reveal.visible { transform:none; }
+  .motion-item { transition:opacity .55s ease var(--reveal-delay,0ms),translate .55s ease var(--reveal-delay,0ms),transform .25s ease,box-shadow .25s ease,border-color .25s ease; }
+  .motion-pending { opacity:0; translate:0 20px; }
+  .motion-item.motion-visible { opacity:1; translate:0 0; }
+  .mb-card.motion-visible:hover { translate:0 -3px; }
+  .chips button, button, .button { transition:background .25s ease,border-color .25s ease,box-shadow .25s ease,transform .25s ease; }
+  .chips button:hover, button:not(:disabled):hover, .button:hover { transform:translateY(-2px); box-shadow:0 7px 20px rgba(22,79,43,.13); }
+  .pn-item { transition:color .25s ease,background .25s ease,box-shadow .25s ease; }
+  .hero h1,.hero p,.hero .prompt,.hero .chips,.announcement { animation-duration:.65s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .motion-item { opacity:1!important; translate:none!important; transition:none!important; }
+  .pn-intro,.hero h1,.hero p,.hero .prompt,.hero .chips,.announcement { animation:none!important; }
+  .pn-mark,.pn-fill,.pn-face,.pn-alt,.pn-dot,.pn-panel,.chips button,button,.button { transition:none!important; }
+  .chips button:hover,button:hover,.button:hover { transform:none!important; }
+}
