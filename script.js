@@ -57,7 +57,7 @@ $('#hero-go').addEventListener('click',()=>{const text=$('#hero-paste').value;if
         const normalized=rowKeys(row)[0][1];
         if(!groups.has(normalized)) groups.set(normalized,[]);
         const group=groups.get(normalized);
-        const reason=group.length ? (group.some(x=>x.channel!==c.id) ? 'merged: normalized email matches a row in another channel' : 'merged: normalized email matches an earlier row') : 'kept: first row for this normalized email';
+        const reason=group.length ? (group[0].channel!==c.id ? 'merged: normalized email matches a row in another channel' : 'merged: normalized email matches an earlier row') : 'kept: first row for this normalized email';
         group.push({channel:c.id,text:label+' — '+reason});
       }
     });
