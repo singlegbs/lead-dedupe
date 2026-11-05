@@ -37,3 +37,52 @@ const samples={agency:[['Email,First name,Company\nana@northstar.example,Ana,Nor
 function loadDemo(kind){channels=[];counter=0;let data=samples[kind][0];data.forEach((text,i)=>{let c={id:++counter,name:i?'Social outreach':'Cold email',text,header:true,map:{}};defaults(c,true);channels.push(c)});renderChannels();invalidate();analyze()};$('#demo-agency').addEventListener('click',()=>loadDemo('agency'));$('#demo-commerce').addEventListener('click',()=>loadDemo('commerce'));
 addChannel();if('IntersectionObserver'in window&&!matchMedia('(prefers-reduced-motion: reduce)').matches){const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.05});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el))}else document.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible'));
 $('#hero-go').addEventListener('click',()=>{const text=$('#hero-paste').value;if(text.trim()){if(!channels.length)addChannel();let target=$('#channels textarea[data-action=text]');target.value=text;target.dispatchEvent(new Event('input',{bubbles:true}))}$('#tool').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});});
+
+/* Explain every input row without changing matching or the export gate. */
+(function(){
+  const originalRender=renderResults;
+  const originalInvalidate=invalidate;
+  function explainRows(){
+    const old=document.getElementById('skipped-row-details');
+    if(old) old.remove();
+    if(!ready) return;
+    const groups=new Map(), skipped=[];
+    channels.forEach(c=>{
+      const table=parse(c.text), start=c.header?1:0;
+      for(let i=start;i<table.length;i++){
+        const cells=table[i], raw=String(cells[Number(c.map.email)]||'').trim();
+        const row={channel:c.id,email:raw,company:''};
+        const label=(c.name.trim()||'Unnamed channel')+' · row '+(i+1)+': '+(raw||'(missing email)');
+        if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(raw)){ skipped.push(label+' — skipped: missing or invalid email'); continue; }
+        const normalized=rowKeys(row)[0][1];
+        if(!groups.has(normalized)) groups.set(normalized,[]);
+        const group=groups.get(normalized);
+        const reason=group.length ? (group.some(x=>x.channel!==c.id) ? 'merged: normalized email matches a row in another channel' : 'merged: normalized email matches an earlier row') : 'kept: first row for this normalized email';
+        group.push({channel:c.id,text:label+' — '+reason});
+      }
+    });
+    const groupedRows=Array.from(groups.values());
+    Array.from($('#results').rows).filter(r=>r.cells.length===5).forEach((tr,i)=>{
+      const entries=groupedRows[i]; if(!entries) return;
+      const details=document.createElement('details');
+      const summary=document.createElement('summary'); summary.textContent='Input rows ('+entries.length+')'; details.appendChild(summary);
+      details.addEventListener('toggle',function(){
+        if(!details.open||details.dataset.built) return;
+        const list=document.createElement('ul');
+        entries.forEach(entry=>{const item=document.createElement('li');item.textContent=entry.text;list.appendChild(item)});
+        details.appendChild(list);details.dataset.built='true';
+      });
+      tr.cells[3].appendChild(details);
+    });
+    if(skipped.length){
+      const details=document.createElement('details'); details.id='skipped-row-details';
+      const summary=document.createElement('summary'); summary.textContent='Skipped input rows ('+skipped.length+')'; details.appendChild(summary);
+      details.addEventListener('toggle',function(){if(!details.open||details.dataset.built)return;const list=document.createElement('ul');skipped.forEach(text=>{const item=document.createElement('li');item.textContent=text;list.appendChild(item)});details.appendChild(list);details.dataset.built='true'});
+      $('#results').closest('.tablewrap').insertAdjacentElement('afterend',details);
+    }
+  }
+  renderResults=function(){originalRender();explainRows()};
+  invalidate=function(){originalInvalidate();const el=document.getElementById('skipped-row-details');if(el)el.remove()};
+  ['start','spacing','first'].forEach(id=>$('#'+id).addEventListener('change',explainRows));
+  $('#spacing').addEventListener('input',explainRows);
+})();
