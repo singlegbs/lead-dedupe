@@ -19,7 +19,7 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 window.addEventListener('load', function(){ window.scrollTo({top:0,left:0,behavior:'instant'}); });
 document.addEventListener('DOMContentLoaded', function(){
   const css = document.createElement('link');
-  css.rel = 'stylesheet'; css.href = 'motion.css?v=1';
+  css.rel = 'stylesheet'; css.href = 'motion.css?v=2';
   css.addEventListener('load', function(){
     if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const observer = new IntersectionObserver(function(entries){
