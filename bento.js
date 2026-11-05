@@ -14,17 +14,10 @@ document.addEventListener('DOMContentLoaded',function(){
     card.addEventListener('pointerleave',function(){['--mb-x','--mb-y','--mb-rx','--mb-ry'].forEach(function(p){card.style.removeProperty(p)});});
   });
 });
-
 /* LeadDedupe page enhancements, written for this site. */
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 window.addEventListener('load', function(){ window.scrollTo({top:0,left:0,behavior:'instant'}); });
 document.addEventListener('DOMContentLoaded', function(){
-  const promo = document.createElement('section');
-  promo.className = 'ld-promo';
-  promo.setAttribute('aria-labelledby', 'ld-promo-title');
-  promo.innerHTML = '<div class="ld-promo-copy"><h2 id="ld-promo-title">Cleaner leads start with <em>one clear list.</em></h2><p>Free to use. No card needed. Your lists stay in your browser; only your export email is sent when you choose to download.</p><a class="ld-promo-cta" href="#tool">Start cleaning free</a></div>';
-  const footer = document.querySelector('footer');
-  if (footer) footer.before(promo); else document.body.appendChild(promo);
   const css = document.createElement('link');
   css.rel = 'stylesheet'; css.href = 'motion.css?v=1';
   css.addEventListener('load', function(){
@@ -37,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function(){
         observer.unobserve(entry.target);
       });
     }, {threshold:0.1});
-    document.querySelectorAll('.mb-card, .bento article, .ld-promo-copy').forEach(function(el,i){
+    document.querySelectorAll('.mb-card, .bento article').forEach(function(el,i){
       el.classList.add('motion-item','motion-pending');
       el.style.setProperty('--reveal-delay', Math.min(i%4*45,135)+'ms');
       observer.observe(el);
